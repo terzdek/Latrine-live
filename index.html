@@ -1,7 +1,7 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html>
 <head>
-	<title>Locus - Wer ist Wo?</title>
+	<title>Locus - Kde je tvůj miláček?</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<meta name="robots" content="noindex, nofollow, noarchive" />
 	<meta name="MSSmartTagsPreventParsing" content="true" />
@@ -56,7 +56,7 @@
 	var cyclemapUrl = 'http://{s}.tile.opencyclemap.org/cycle/{z}/{x}/{y}.png',
 		cyclemap = new L.TileLayer(cyclemapUrl, {maxZoom: 18, attribution: osmAttribution});
 	// OpentopoMap
-	var opentopoUrl = "http://a.tile.opentopomap.org/{z}/{x}/{y}.png",
+	var opentopoUrl = "http://mapserver.mapy.cz/turist-m/{z}-{x}-{y}",
 		opentopoAttribution = 'Map Data by <a href="http://opentopomap.org/" target="_blank">OpenTopoMap</a> (<a href="https://creativecommons.org/licenses/by-sa/3.0/" target="_blank">CC-BY-SA</a>)',
 		opentopo = new L.TileLayer(opentopoUrl, {maxZoom: 18, attribution: opentopoAttribution});
 	// Hike and Bike
@@ -109,16 +109,16 @@
 
 	// Set default until the first update
 	var map = new L.Map('map', {
-		center: new L.LatLng(51.4768, 0.0006),
+		center: new L.LatLng(50.6580, 14.0406),
 		zoom: 14,
 		layers: [opentopo]
 	});
 	map.addControl(layersControl);
 
-	var marker = L.marker([51.4768, 0.0006]);
+	var marker = L.marker([50.6580, 14.0406]);
 	marker.addTo(map);
-	marker.bindPopup("<b>Derzeit nicht auf Sendung</b>").openPopup();
-	var circle = L.circle([51.4768, 0.0006], 100, {
+	marker.bindPopup("<b>Čekám na signál GPS</b>").openPopup();
+	var circle = L.circle([50.6580, 14.0406], 100, {
 		color: 'blue',
 		fillColor: '#f03',
 		fillOpacity: 0.5
@@ -151,9 +151,9 @@
 	var key =  window.location.hash.substring(1);
 
 	if (!key.match(/^[\w\d]{5,15}$/)) {
-		Check = prompt('Schlüssel (5-15 Stellen)?','');
+		Check = prompt('Zlato, prosím zadej heslo, které jsem ti dal!','');
 		if (!Check.match(/^[\w\d]{5,15}$/)) {
-			window.alert('Bitte richtigen Schlüssel angeben');
+			window.alert('Zadala si špatné heslo, prosím dej F5 a zadej znovu!');
 			key = '';
 		} else {
 			key = Check;
