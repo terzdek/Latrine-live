@@ -100,10 +100,10 @@
 		"mtbmapy": esri
 	};
 	var overlayMaps = {
-		"Hillshading": hillshading,
-		"Trails": waymarkedshadinghike,
-		"Radrouten": waymarkedshadingbike,
-		"Contour Lines": contourshading
+		"stínování": hillshading,
+		"turistické trasy eu": waymarkedshadinghike,
+		"turistické trasy cz": waymarkedshadingbike,
+		"neobsazeno": contourshading
 	};
 	var layersControl = new L.Control.Layers(baseMaps, overlayMaps);
 
@@ -129,7 +129,7 @@
 	AutoPanCheckbox.onAdd = function (map) {
 		var div = L.DomUtil.create('div', 'AutoPanCheckbox');
 
-		div.innerHTML = '<b><form><input id="AutoPanCheckbox" type="checkbox"/>Auto-Pan</form></b>'; 
+		div.innerHTML = '<b><form><input id="AutoPanCheckbox" type="checkbox"/>automatický zoom</form></b>'; 
 		return div;
 	};
 	AutoPanCheckbox.addTo(map);
@@ -235,13 +235,13 @@
 			// Expand popup 
 			popUpText = popUpText + '<b>'+ key + '</b>: ' + data.message + '<br/>'
 				+ '(baterie: ' + data.battery + '% / GSM signál: ' + data.gsm_signal + '%)<br/></p>'
-				+ '<p>Rychlost ( ' + trend + ' ) / Diff: ' + speeddiff + ' m/s<br/>'
+				+ '<p>Rychlost ( ' + trend + ' ) / diference: ' + speeddiff + ' m/s<br/>'
 				+ kmh.toFixed(2) + ' km/h<br/>'
 				+ data.speed + ' m/s<br/>'
 				+ pmin.toFixed() + ':' + psek.toFixed() +' min/km<br/>'
 				+ '<br/>'
 				+ 'směr: ' + data.bearing + ' stupňů<br/>'
-				+ 'Výška ( '+ trendH + ' ): ' + data.alt + ' m, Diff: ' + altdiff.toFixed(1) + ' m<br/>';
+				+ 'Výška ( '+ trendH + ' ): ' + data.alt + ' m, diference: ' + altdiff.toFixed(1) + ' m<br/>';
 				+ '</p>';
 
 			if (autoPan == 1) {
