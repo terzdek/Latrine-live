@@ -60,10 +60,10 @@
 		opentopoAttribution = 'Map Data by <a href="http://opentopomap.org/" target="_blank">OpenTopoMap</a> (<a href="https://creativecommons.org/licenses/by-sa/3.0/" target="_blank">CC-BY-SA</a>)',
 		opentopo = new L.TileLayer(opentopoUrl, {maxZoom: 18, attribution: opentopoAttribution});
 	// Hike and Bike
-	var hikebikeUrl = 'http://a.toolserver.org/tiles/hikebike/{z}/{x}/{y}.png',
+	var hikebikeUrl = 'http://mapserver.mapy.cz/winter-m/{z}-{x}-{y}',
 		hikebike = new L.TileLayer(hikebikeUrl, {maxZoom: 18, attribution: osmAttribution});
-	// ESRI
-	var esriUrl = "http://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}.png",
+	// mapy
+	var esriUrl = "http://tile.mtbmap.cz/mtbmap_tiles/{z}/{x}/{y}.png",
 		esriAttribution = "National Geographic, Esri, DeLorme, NAVTEQ",
 		esri = new L.TileLayer(esriUrl, {maxZoom: 16, attribution: esriAttribution});
 
@@ -79,7 +79,7 @@
 		hillshadingAttribution = 'Elevation Data by <a href="http://korona.geog.uni-heidelberg.de/contact.html" target="_blank">Korona</a>',
 		hillshading = new L.TileLayer(hillshadingUrl, {maxZoom: 18, attribution: hillshadingAttribution});
 	// Contour Lines
-	var contourshadingUrl = 'http://129.206.66.245:8006/tms_il.ashx?x={x}&y={y}&z={z}',
+	var contourshadingUrl = 'mapserver.mapy.cz/hybrid-base-m/{z}-{x}-{y}',
 		contourshadingAttribution = 'Contour Data by <a href="http://korona.geog.uni-heidelberg.de/contact.html" target="_blank">Korona</a>',
 		contourshading = new L.TileLayer(contourshadingUrl, {maxZoom: 18, attribution: contourshadingAttribution});
 	// Waymarked
@@ -87,17 +87,17 @@
 		waymarkedshadinghikeAttribution = 'Trails Data by <a href="http://www.waymarkedtrails.org" target="_blank">Waymarkedtrails</a>',
 		waymarkedshadinghike = new L.TileLayer(waymarkedshadinghikeUrl, {maxZoom: 18, attribution: waymarkedshadinghikeAttribution});
 	// Waymarked
-	var waymarkedshadingbikeUrl = 'http://tile.waymarkedtrails.org/cycling/{z}/{x}/{y}.png',
+	var waymarkedshadingbikeUrl = 'http://mapserver.mapy.cz/hybrid-turist-m/{z}-{x}-{y}',
 		waymarkedshadingbikeAttribution = 'Trails Data by <a href="http://www.waymarkedtrails.org" target="_blank">Waymarkedtrails</a>',
 		waymarkedshadingbike = new L.TileLayer(waymarkedshadingbikeUrl, {maxZoom: 18, attribution: waymarkedshadingbikeAttribution});
 
 	var baseMaps = {
 		"OpenStreetMap": osm,
 		"OpenCycleMap": cyclemap,
-		"OpenTopoMap": opentopo,
-		"Hike & Bike": hikebike,
+		"turistická mapy.cz": opentopo,
+		"zimní mapy.cz": hikebike,
 		"Google Hybrid": google,
-		"ESRI": esri
+		"mtbmapy": esri
 	};
 	var overlayMaps = {
 		"Hillshading": hillshading,
@@ -157,10 +157,10 @@
 			key = '';
 		} else {
 			key = Check;
-			window.alert('Hallo, ' + key + '  ! \nDies ist ein gültiger Schlüssel?\n\nIhr direkter Link lautet:\nhttp://<server>/#' + key + '');
+			window.alert('Ahoj, ' + key + '  ! \nZadala si správné heslo.\n\nPokud nechceš zadávat heslo, zadej příště rovnou:\nhttp://109.164.113.82:81/myweb/Latrine_live/#' + key + '');
 		}
 		} else {
-			window.alert('Hallo, ' + key + '  ! \nDies ist ein gültiger Schlüssel?');
+			window.alert('Ahoj, ' + key + '  ! \nZadala si správné heslo.');
 		}
 
 	// Fetch latlon data and update marker and popup-data
@@ -196,7 +196,7 @@
 			*/
 
 			// Update popup
-			var popUpText = '<p>Letzte Position: ' + days + 'd :' + hours + 'h :' + minutes + 'm :' + seconds + 's<br>';
+			var popUpText = '<p>Poslední pozice: ' + days + 'd :' + hours + 'h :' + minutes + 'm :' + seconds + 's<br>';
 
 			// Calculate speed (m/sec -> km/h ...)
 			var kmh = data.speed * 3.6;
@@ -234,14 +234,14 @@
 
 			// Expand popup 
 			popUpText = popUpText + '<b>'+ key + '</b>: ' + data.message + '<br/>'
-				+ '(Akku: ' + data.battery + '% / GSM: ' + data.gsm_signal + '%)<br/></p>'
-				+ '<p>Speed ( ' + trend + ' ) / Diff: ' + speeddiff + ' m/s<br/>'
+				+ '(baterie: ' + data.battery + '% / GSM signál: ' + data.gsm_signal + '%)<br/></p>'
+				+ '<p>Rychlost ( ' + trend + ' ) / Diff: ' + speeddiff + ' m/s<br/>'
 				+ kmh.toFixed(2) + ' km/h<br/>'
 				+ data.speed + ' m/s<br/>'
 				+ pmin.toFixed() + ':' + psek.toFixed() +' min/km<br/>'
 				+ '<br/>'
-				+ 'Richtung: ' + data.bearing + ' Grad<br/>'
-				+ 'Höhe ( '+ trendH + ' ): ' + data.alt + ' m, Diff: ' + altdiff.toFixed(1) + ' m<br/>';
+				+ 'směr: ' + data.bearing + ' stupňů<br/>'
+				+ 'Výška ( '+ trendH + ' ): ' + data.alt + ' m, Diff: ' + altdiff.toFixed(1) + ' m<br/>';
 				+ '</p>';
 
 			if (autoPan == 1) {
