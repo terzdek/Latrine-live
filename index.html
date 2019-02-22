@@ -1,7 +1,7 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html>
 <head>
-	<title>Locus - Kde je tvůj miláček?</title>
+	<title>Locus - Najdi si mě?</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<meta name="robots" content="noindex, nofollow, noarchive" />
 	<meta name="MSSmartTagsPreventParsing" content="true" />
@@ -33,11 +33,11 @@
 <script type="text/javascript">
 
 
-	/****** Adjust the following location (URL) to your PHP script *********/
+	/****** Nastav správnou cestu scriptu (umístění na serveru) *********/
 
 	var phpScript = 'latrine.php'; // /cgi-bin/latrine.php
 
-	/*** Change the following only if you know what you're doing *********/
+	/*** Prováděj změny, jen pokud víš, co děláš! *********/
 
 
 	// Initialize some Variables
@@ -62,7 +62,7 @@
 	// Hike and Bike
 	var hikebikeUrl = 'http://mapserver.mapy.cz/winter-m/{z}-{x}-{y}',
 		hikebike = new L.TileLayer(hikebikeUrl, {maxZoom: 18, attribution: osmAttribution});
-	// mapy
+	// Esri
 	var esriUrl = "http://tile.mtbmap.cz/mtbmap_tiles/{z}/{x}/{y}.png",
 		esriAttribution = "National Geographic, Esri, DeLorme, NAVTEQ",
 		esri = new L.TileLayer(esriUrl, {maxZoom: 16, attribution: esriAttribution});
@@ -151,16 +151,16 @@
 	var key =  window.location.hash.substring(1);
 
 	if (!key.match(/^[\w\d]{5,15}$/)) {
-		Check = prompt('Zlato, prosím zadej heslo, které jsem ti dal!','');
+		Check = prompt('Prosím, zadej heslo, které jsem ti dal!','');
 		if (!Check.match(/^[\w\d]{5,15}$/)) {
-			window.alert('Zadala si špatné heslo, prosím dej F5 a zadej znovu!');
+			window.alert('Zadáno špatné heslo, prosím dej F5 a zadej znovu!');
 			key = '';
 		} else {
 			key = Check;
-			window.alert('Ahoj, ' + key + '  ! \nZadala si správné heslo.\n\nPokud nechceš zadávat heslo, zadej příště rovnou:\nhttp://109.164.113.82:81/myweb/Latrine_live/#' + key + '');
+			window.alert('Ahoj, ' + key + '  ! \nVýborně, zadáno správné heslo.\n\nPokud nechceš zadávat heslo, zadej příště rovnou:\nhttp://109.164.113.82:81/myweb/Latrine_live/#' + key + '');
 		}
 		} else {
-			window.alert('Ahoj, ' + key + '  ! \nZadala si správné heslo.');
+			window.alert('Ahoj, ' + key + '  ! \nVýborně, zadáno správné heslo.');
 		}
 
 	// Fetch latlon data and update marker and popup-data
