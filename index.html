@@ -1,23 +1,31 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html>
 <head>
-	<title>Locus - Najdi si mě?</title>
+	<title>Locus - Kde je tvůj miláček?</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<meta name="robots" content="noindex, nofollow, noarchive" />
+	<meta 
+
+name="robots" content="noindex, nofollow, noarchive" />
 	<meta name="MSSmartTagsPreventParsing" content="true" />
 	<meta http-equiv="imagetoolbar" content="no" />
-	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, 
+
+maximum-scale=1.0, user-scalable=no" />
 	<link type="image/ico" rel="shortcut icon" href="/favicon.ico" />
 	<link rel="stylesheet" href="leaflet0.6.4/leaflet.css" />
 	<!--[if lte IE 8]>
-		<link rel="stylesheet" href="leaflet0.6.4/leaflet.ie.css" />
+		<link rel="stylesheet" 
+
+href="leaflet0.6.4/leaflet.ie.css" />
 	<![endif]-->
 	<script src="leaflet0.6.4/leaflet.js"></script>
 	<script src="https://code.jquery.com/jquery-1.10.1.min.js"></script>
 	<style type="text/css">
 	<!--
 		body {
-		padding: 0;
+		
+
+padding: 0;
 		margin: 0;
 		}
 		html, body, #map {
@@ -30,17 +38,21 @@
 
 <div id="map" style="width: 100%; height: 100%;"></div>
 
-<script type="text/javascript">
+<script 
+
+type="text/javascript">
 
 
-	/****** Nastav správnou cestu scriptu (umístění na serveru) *********/
+	/****** Adjust the following location (URL) to your PHP script *********/
 
 	var phpScript = 'latrine.php'; // /cgi-bin/latrine.php
 
-	/*** Prováděj změny, jen pokud víš, co děláš! *********/
+	/*** Change the following only if you know what you're doing *********/
 
 
-	// Initialize some Variables
+	// 
+
+Initialize some Variables
 	var lastspeed = 0;
 	var lastalt = 0;
 	var center = 0;
@@ -49,66 +61,100 @@
 	// Maps
 	//
 	// OpenStreetMap
-	var osmUrl = 'http://{s}.tile.openstreetmap.de/tiles/osmde/{z}/{x}/{y}.png', // http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png
-		osmAttribution = 'Map Data from <a href="http://www.openstreetmap.org/" target="_blank">OpenStreetMap</a> (<a href="http://creativecommons.org/licenses/by-sa/2.0/" target="_blank">CC-by-SA 2.0</a>)',
+	var osmUrl = 'http://{s}.tile.openstreetmap.de/tiles/osmde/{z}/{x}/{y}.png', 
+
+// http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png
+		osmAttribution = 'Map Data from <a href="http://www.openstreetmap.org/" target="_blank">OpenStreetMap</a> (<a href="http://creativecommons.org/licenses/by-sa/2.0/" 
+
+target="_blank">CC-by-SA 2.0</a>)',
 		osm = new L.TileLayer(osmUrl, {maxZoom: 18, attribution: osmAttribution});
 	// OpenCycleMap
 	var cyclemapUrl = 'http://{s}.tile.opencyclemap.org/cycle/{z}/{x}/{y}.png',
-		cyclemap = new L.TileLayer(cyclemapUrl, {maxZoom: 18, attribution: osmAttribution});
+		
+
+cyclemap = new L.TileLayer(cyclemapUrl, {maxZoom: 18, attribution: osmAttribution});
 	// OpentopoMap
 	var opentopoUrl = "http://mapserver.mapy.cz/turist-m/{z}-{x}-{y}",
-		opentopoAttribution = 'Map Data by <a href="http://opentopomap.org/" target="_blank">OpenTopoMap</a> (<a href="https://creativecommons.org/licenses/by-sa/3.0/" target="_blank">CC-BY-SA</a>)',
-		opentopo = new L.TileLayer(opentopoUrl, {maxZoom: 18, attribution: opentopoAttribution});
+		opentopoAttribution = 'Map Data by <a 
+
+href="http://opentopomap.org/" target="_blank">OpenTopoMap</a> (<a href="https://creativecommons.org/licenses/by-sa/3.0/" target="_blank">CC-BY-SA</a>)',
+		opentopo = new L.TileLayer(opentopoUrl, {maxZoom: 18, attribution: 
+
+opentopoAttribution});
 	// Hike and Bike
 	var hikebikeUrl = 'http://mapserver.mapy.cz/winter-m/{z}-{x}-{y}',
 		hikebike = new L.TileLayer(hikebikeUrl, {maxZoom: 18, attribution: osmAttribution});
-	// Esri
-	var esriUrl = "http://tile.mtbmap.cz/mtbmap_tiles/{z}/{x}/{y}.png",
+	// mapy
+	var esriUrl = 
+
+"http://tile.mtbmap.cz/mtbmap_tiles/{z}/{x}/{y}.png",
 		esriAttribution = "National Geographic, Esri, DeLorme, NAVTEQ",
 		esri = new L.TileLayer(esriUrl, {maxZoom: 16, attribution: esriAttribution});
 
 	// Googly Hybrid
-	var googleUrl = "http://mts.google.com/vt/lyrs=y&x={x}&y={y}&z={z}",
+	
+
+var googleUrl = "http://mts.google.com/vt/lyrs=y&x={x}&y={y}&z={z}",
 		googleAttribution = "(c)2015 Google - Map data",
 		google = new L.TileLayer(googleUrl, {maxZoom: 28, attribution: googleAttribution});
 
-	// Shaders
+	// 
+
+Shaders
 	//
 	// Hillshading
 	var hillshadingUrl = 'http://129.206.66.245:8004/tms_hs.ashx?x={x}&y={y}&z={z}',
-		hillshadingAttribution = 'Elevation Data by <a href="http://korona.geog.uni-heidelberg.de/contact.html" target="_blank">Korona</a>',
+		hillshadingAttribution = 'Elevation Data by <a href="http://korona.geog.uni-heidelberg.de/contact.html" 
+
+target="_blank">Korona</a>',
 		hillshading = new L.TileLayer(hillshadingUrl, {maxZoom: 18, attribution: hillshadingAttribution});
 	// Contour Lines
-	var contourshadingUrl = 'mapserver.mapy.cz/hybrid-base-m/{z}-{x}-{y}',
+	var contourshadingUrl = 'mapserver.mapy.cz/hybrid-base-m/{z}-{x}-
+
+{y}',
 		contourshadingAttribution = 'Contour Data by <a href="http://korona.geog.uni-heidelberg.de/contact.html" target="_blank">Korona</a>',
-		contourshading = new L.TileLayer(contourshadingUrl, {maxZoom: 18, attribution: contourshadingAttribution});
+		contourshading = new L.TileLayer(contourshadingUrl, {maxZoom: 18, 
+
+attribution: contourshadingAttribution});
 	// Waymarked
 	var waymarkedshadinghikeUrl = 'http://tile.waymarkedtrails.org/hiking/{z}/{x}/{y}.png',
-		waymarkedshadinghikeAttribution = 'Trails Data by <a href="http://www.waymarkedtrails.org" target="_blank">Waymarkedtrails</a>',
+		waymarkedshadinghikeAttribution = 'Trails Data by <a 
+
+href="http://www.waymarkedtrails.org" target="_blank">Waymarkedtrails</a>',
 		waymarkedshadinghike = new L.TileLayer(waymarkedshadinghikeUrl, {maxZoom: 18, attribution: waymarkedshadinghikeAttribution});
 	// Waymarked
-	var waymarkedshadingbikeUrl = 'http://mapserver.mapy.cz/hybrid-turist-m/{z}-{x}-{y}',
+	var 
+
+waymarkedshadingbikeUrl = 'http://mapserver.mapy.cz/hybrid-turist-m/{z}-{x}-{y}',
 		waymarkedshadingbikeAttribution = 'Trails Data by <a href="http://www.waymarkedtrails.org" target="_blank">Waymarkedtrails</a>',
-		waymarkedshadingbike = new L.TileLayer(waymarkedshadingbikeUrl, {maxZoom: 18, attribution: waymarkedshadingbikeAttribution});
+		
+
+waymarkedshadingbike = new L.TileLayer(waymarkedshadingbikeUrl, {maxZoom: 18, attribution: waymarkedshadingbikeAttribution});
 
 	var baseMaps = {
 		"OpenStreetMap": osm,
-		"OpenCycleMap": cyclemap,
-		"turistická mapy.cz": opentopo,
-		"zimní mapy.cz": hikebike,
-		"Google Hybrid": google,
-		"mtbmapy": esri
+		"Dopravní mapa": cyclemap,
+		
+
+"Turistická mapa": opentopo,
+		"Zimní mapa": hikebike,
+		"Satelitní mapa": google,
+		"Mtbmapa": esri
 	};
 	var overlayMaps = {
 		"stínování": hillshading,
-		"turistické trasy eu": waymarkedshadinghike,
+		"turistické trasy eu": 
+
+waymarkedshadinghike,
 		"turistické trasy cz": waymarkedshadingbike,
 		"neobsazeno": contourshading
 	};
 	var layersControl = new L.Control.Layers(baseMaps, overlayMaps);
 
 	// Set default until the first update
-	var map = new L.Map('map', {
+	
+
+var map = new L.Map('map', {
 		center: new L.LatLng(50.6580, 14.0406),
 		zoom: 14,
 		layers: [opentopo]
@@ -116,7 +162,9 @@
 	map.addControl(layersControl);
 
 	var marker = L.marker([50.6580, 14.0406]);
-	marker.addTo(map);
+	marker.addTo
+
+(map);
 	marker.bindPopup("<b>Čekám na signál GPS</b>").openPopup();
 	var circle = L.circle([50.6580, 14.0406], 100, {
 		color: 'blue',
@@ -124,23 +172,31 @@
 		fillOpacity: 0.5
 	}).addTo(map);
 
-	// Create Auto-Pan control for to switch auto panning of map on/off
+	// 
+
+Create Auto-Pan control for to switch auto panning of map on/off
 	var AutoPanCheckbox = L.control({position: 'topright'});
 	AutoPanCheckbox.onAdd = function (map) {
-		var div = L.DomUtil.create('div', 'AutoPanCheckbox');
+		var div = L.DomUtil.create('div', 
+
+'AutoPanCheckbox');
 
 		div.innerHTML = '<b><form><input id="AutoPanCheckbox" type="checkbox"/>automatický zoom</form></b>'; 
 		return div;
 	};
 	AutoPanCheckbox.addTo(map);
-	document.getElementById("AutoPanCheckbox").checked = true;
+	document.getElementById
+
+("AutoPanCheckbox").checked = true;
 
 	// Add the event handler so that panning gets (de-)activated
 	function handleAutoPan() {
 		if (this.checked == 1) {
 			autoPan = 1;
 		} else {
-			autoPan = 0;
+		
+
+	autoPan = 0;
 		}
 	//	alert("Clicked, checked = " + this.checked + " / " + autoPan);
 	};
@@ -148,104 +204,144 @@
 	document.getElementById ("AutoPanCheckbox").addEventListener ("click", handleAutoPan, false);
 
 	// Check private key
-	var key =  window.location.hash.substring(1);
+	
+
+var key =  window.location.hash.substring(1);
 
 	if (!key.match(/^[\w\d]{5,15}$/)) {
-		Check = prompt('Prosím, zadej heslo, které jsem ti dal!','');
+		Check = prompt('Zlato, prosím zadej heslo, které jsem ti dal!','');
 		if (!Check.match(/^[\w\d]{5,15}$/)) {
-			window.alert('Zadáno špatné heslo, prosím dej F5 a zadej znovu!');
+			
+
+window.alert('Zadala si špatné heslo, prosím dej F5 a zadej znovu!');
 			key = '';
 		} else {
 			key = Check;
-			window.alert('Ahoj, ' + key + '  ! \nVýborně, zadáno správné heslo.\n\nPokud nechceš zadávat heslo, zadej příště rovnou:\nhttp://109.164.113.82:81/myweb/Latrine_live/#' + key + '');
+			window.alert('Ahoj, ' + key + '  ! \nSuper, zadala si správné 
+
+heslo.\n\nPokud nechceš zadávat heslo, zadej příště rovnou:\nhttp://109.164.113.82:81/myweb/Latrine_live/#' + key + '');
 		}
 		} else {
-			window.alert('Ahoj, ' + key + '  ! \nVýborně, zadáno správné heslo.');
+			window.alert('Ahoj, ' + key + '  ! \nSuper, zadala si 
+
+správné heslo.');
 		}
 
 	// Fetch latlon data and update marker and popup-data
 	var refreshPos = function(){
 		$.getJSON(phpScript+'?view=1&key='+key+'', function(data) {
-			//alert(JSON.stringify(data)); // Output Data for debug
+			//alert
+
+(JSON.stringify(data)); // Output Data for debug
 			marker.setLatLng([data.lat,data.lon]);
 			circle.setLatLng([data.lat,data.lon]);
 			circle.setRadius(data.acc);
 
-			// Center the map on first load
+			// 
+
+Center the map on first load
 			if (center < 1) {
 				map.setView( [data.lat,data.lon], 15 )
 				center = 1;
 			}
 
-			// Calculate the time of last update
+			// Calculate the time 
+
+of last update
 			var lastupdate = data.now - data.time;
 			var minutes = Math.floor(lastupdate / 60);
 			var hours = Math.floor(minutes / 60);
-			var days = Math.floor(hours / 24);
+			var days = Math.floor(hours / 
+
+24);
 			var seconds = lastupdate % 60;
 			minutes = minutes - hours * 60;
 			hours = hours - days * 24;
 			minutes = minutes < 9 ? "0"+minutes : minutes;
-			seconds = seconds < 9 ? "0"+seconds : seconds;
+			
+
+seconds = seconds < 9 ? "0"+seconds : seconds;
 
 			/* Housekeeping (Obsolet, done in latrine.php)
 			if (lastupdate > 24*60*60) { // 24 Stunden: 24*60*60
 				alert('Lösche')
-				$.post(phpScript+'?delete=1&key='+key);
+			
+
+	$.post(phpScript+'?delete=1&key='+key);
 			}
 			*/
 
 			// Update popup
-			var popUpText = '<p>Poslední pozice: ' + days + 'd :' + hours + 'h :' + minutes + 'm :' + seconds + 's<br>';
+			var popUpText = '<p>Poslední pozice: ' + days + 'd :' + hours + 'h :' + minutes + 'm :' + 
+
+seconds + 's<br>';
 
 			// Calculate speed (m/sec -> km/h ...)
 			var kmh = data.speed * 3.6;
 			var psec = 3600 / kmh;
 			var pmin = psec / 60;
-				pmin = Math.floor(pmin);
+				pmin 
+
+= Math.floor(pmin);
 			var psek = psec - pmin * 60;
 			var trend = "\u2192";
 			var trendH = "\u2192";
 
 			if (data.speed == 0) {
 				var pmin = 0;
-				var psek = 0;
+		
+
+		var psek = 0;
 			}
 
 			// Faster or slower?
 			if (data.speed > lastspeed) {
 				trend = "\u2191";
 			}
-			if (data.speed < lastspeed) {
+			if 
+
+(data.speed < lastspeed) {
 				trend = "\u2193";
 			}
 			speeddiff = data.speed - lastspeed;
 			lastspeed = data.speed;
 
 			// Higher or lower?
-			if (data.alt > lastalt) {
+	
+
+		if (data.alt > lastalt) {
 				trendH = "\u2191";
 			};
 			if (data.alt < lastalt) {
 				trendH = "\u2193";
 			}
-			altdiff = data.alt - lastalt;
+	
+
+		altdiff = data.alt - lastalt;
 			lastalt = data.alt;
 
 			// Expand popup 
 			popUpText = popUpText + '<b>'+ key + '</b>: ' + data.message + '<br/>'
-				+ '(baterie: ' + data.battery + '% / GSM signál: ' + data.gsm_signal + '%)<br/></p>'
+				
+
++ '(baterie: ' + data.battery + '% / GSM signál: ' + data.gsm_signal + '%)<br/></p>'
 				+ '<p>Rychlost ( ' + trend + ' ) / diference: ' + speeddiff + ' m/s<br/>'
-				+ kmh.toFixed(2) + ' km/h<br/>'
+				+ kmh.toFixed(2) + ' 
+
+km/h<br/>'
 				+ data.speed + ' m/s<br/>'
 				+ pmin.toFixed() + ':' + psek.toFixed() +' min/km<br/>'
 				+ '<br/>'
-				+ 'směr: ' + data.bearing + ' stupňů<br/>'
+				+ 'směr: ' + 
+
+data.bearing + ' stupňů<br/>'
 				+ 'Výška ( '+ trendH + ' ): ' + data.alt + ' m, diference: ' + altdiff.toFixed(1) + ' m<br/>';
 				+ '</p>';
 
 			if (autoPan == 1) {
-				map.panTo( [data.lat,data.lon] );
+		
+
+		map.panTo( [data.lat,data.lon] );
 			}
 			marker.setPopupContent(popUpText);
 		})
@@ -254,11 +350,15 @@
 
 	// Fetch geojson data and update path on map
 	var refreshGeo = function(){
-		$.getJSON(phpScript+'?geo=1&key='+key+'', function(data) {
+	
+
+	$.getJSON(phpScript+'?geo=1&key='+key+'', function(data) {
 			if (data.error) { alert('Error: ' + data.error) }
 			var myPath = L.geoJson(data, {
 				style: {
-					color: '#ff0000',
+		
+
+			color: '#ff0000',
 					weight: 5,
 					opacity: 1
 				}
@@ -266,7 +366,9 @@
 		});
 	};
 
-	// Refresh
+	// 
+
+Refresh
 	refreshPos();
 	refreshGeo();
 
